@@ -11,23 +11,27 @@ XML_FILE = "movie_database.xml"
 
 # --- SERVER URL GENERATOR ---
 SERVER_URLS = []
-# Bangla (Kolkata)
+
+# 1. Bangla (Kolkata) Category
 SERVER_URLS += [f"http://10.16.100.202/ftps10/iccftps10sasd{i}/Movies/Bangla%20(Kolkata)/" for i in range(1, 10)]
 SERVER_URLS += [f"http://10.16.100.206/ftps3/ftps3d{i}/Movies/Bangla%20(Kolkata)/" for i in range(1, 8)]
 SERVER_URLS += [f"http://10.16.100.212/iccftps12/iccftps12sasd{i}/Movies/Bangla%20(Kolkata)/" for i in range(1, 10)]
-# Dual Audio
+
+# 2. Dual Audio Category
 SERVER_URLS += [f"http://10.16.100.202/ftps10/iccftps10sasd{i}/Movies/Dual%20Audio/" for i in range(1, 10)]
 SERVER_URLS += [f"http://10.16.100.206/ftps3/ftps3d{i}/Movies/Dual%20Audio/" for i in range(1, 8)]
 SERVER_URLS += [f"http://10.16.100.212/iccftps12/iccftps12sasd{i}/Movies/Dual%20Audio/" for i in range(1, 10)]
 SERVER_URLS += [f"http://10.16.100.213/iccftps13/iccftps13sasd{i}/Movies/Dual%20Audio/" for i in range(1, 10)]
 SERVER_URLS += [f"http://10.16.100.214/iccftps14/iccftps14sasd{i}/Movies/Dual%20Audio/" for i in range(1, 8)]
-# Hindi
+
+# 3. Hindi Category
 SERVER_URLS += [f"http://10.16.100.202/ftps10/iccftps10sasd{i}/Movies/Hindi/" for i in range(1, 10)]
 SERVER_URLS += [f"http://10.16.100.206/ftps3/ftps3d{i}/Movies/Hindi/" for i in range(1, 8)]
 SERVER_URLS += [f"http://10.16.100.212/iccftps12/iccftps12sasd{i}/Movies/Hindi/" for i in range(1, 10)]
 SERVER_URLS += [f"http://10.16.100.213/iccftps13/iccftps13sasd{i}/Movies/Hindi/" for i in range(1, 10)]
 SERVER_URLS += [f"http://10.16.100.214/iccftps14/iccftps14sasd{i}/Movies/Hindi/" for i in range(1, 8)]
-# South Indian
+
+# 4. South Indian (Hindi Dubbed) Category
 SERVER_URLS += [f"http://10.16.100.202/ftps10/iccftps10sasd{i}/Movies/South%20Indian%20(Hindi%20Dubbed)/" for i in range(1, 10)]
 SERVER_URLS += [f"http://10.16.100.206/ftps3/ftps3d{i}/Movies/South%20Indian%20(Hindi%20Dubbed)/" for i in range(1, 8)]
 SERVER_URLS += [f"http://10.16.100.212/iccftps12/iccftps12sasd{i}/Movies/South%20Indian%20(Hindi%20Dubbed)/" for i in range(1, 10)]
@@ -102,8 +106,7 @@ def scan_and_save(mode="update"):
                         new_count += 1
         except: continue
     
-    # --- YEAR GROUPING & SORTING LOGIC ---
-    # মুভিগুলোকে বছর অনুযায়ী সাজানো (নতুন বছর সবার আগে আসবে)
+    # --- YEAR GROUPING & SORTING ---
     def sort_key(movie):
         year = movie['year']
         return int(year) if year.isdigit() else 0
@@ -126,7 +129,6 @@ def search_movie():
     query = input("\nEnter movie name: ").lower()
     results = [m for m in movies if query in m['title'].lower()]
     
-    # সার্চ রেজাল্টেও বছরের সিরিয়াল বজায় থাকবে
     for i, m in enumerate(results[:20], 1): 
         print(f"{i}. [{m['year']}] {m['title']}")
         
